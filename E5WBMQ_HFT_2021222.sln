@@ -21,6 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{71AA88
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E5WBMQ_HFT_2021222.Endpoint", "E5WBMQ_HFT_2021222.Endpoint\E5WBMQ_HFT_2021222.Endpoint.csproj", "{4FB90BD8-E5D0-40D7-A7CA-738E66502349}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{C307C659-FCAF-4314-B026-2F78987E2A29}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
