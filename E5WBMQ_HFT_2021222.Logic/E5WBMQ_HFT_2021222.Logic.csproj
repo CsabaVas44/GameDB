@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\E5WBMQ_HFT_2021222.Models\E5WBMQ_HFT_2021222.Models.csproj" />
+    <ProjectReference Include="..\E5WBMQ_HFT_2021222.Repository\E5WBMQ_HFT_2021222.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
