@@ -19,11 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{D5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{71AA8840-D779-42C0-B943-259288609E26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E5WBMQ_HFT_2021222.Endpoint", "E5WBMQ_HFT_2021222.Endpoint\E5WBMQ_HFT_2021222.Endpoint.csproj", "{4FB90BD8-E5D0-40D7-A7CA-738E66502349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E5WBMQ_HFT_2021222.Endpoint", "E5WBMQ_HFT_2021222.Endpoint\E5WBMQ_HFT_2021222.Endpoint.csproj", "{4FB90BD8-E5D0-40D7-A7CA-738E66502349}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{C307C659-FCAF-4314-B026-2F78987E2A29}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		..\..\..\Desktop\DataBaseContext.txt = ..\..\..\Desktop\DataBaseContext.txt
 	EndProjectSection
 EndProject
 Global
