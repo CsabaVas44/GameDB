@@ -19,11 +19,9 @@ namespace E5WBMQ_HFT_2021222.Models
         public string GameName { get; set; }
 
         [Required]
-       
         public int GenreId { get; set; }
 
         [Required]
-     
         public int PublisherId { get; set; }
 
         
