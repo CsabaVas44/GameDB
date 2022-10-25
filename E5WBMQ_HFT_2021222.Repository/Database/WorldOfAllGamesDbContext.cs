@@ -38,9 +38,18 @@ namespace E5WBMQ_HFT_2021222.Repository.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            //TODO--------LINKING the tables
+            modelBuilder.Entity<VideoGames>(games => games
+            .HasOne(games => games.Publisher)
+            .WithMany(publisher => publisher.VideoGames)
+            .HasForeignKey(games => games.PublisherId)
+            .OnDelete(DeleteBehavior.Cascade));
 
 
+            modelBuilder.Entity<VideoGames>(games => games
+            .HasOne(games => games.Genre)
+            .WithMany(genre => genre.VideoGames)
+            .HasForeignKey(games => games.GenreId)
+            .OnDelete(DeleteBehavior.Cascade));
 
             modelBuilder.Entity<VideoGames>().HasData(new Models.VideoGames[]
             {
