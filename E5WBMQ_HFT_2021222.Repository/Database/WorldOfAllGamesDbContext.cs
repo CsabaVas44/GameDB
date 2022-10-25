@@ -86,6 +86,8 @@ namespace E5WBMQ_HFT_2021222.Repository.Data
                 new VideoGames("31	Mario Kart 8 Deluxe	7	9	46.82	10	2017	True"),
                 new VideoGames("32	Mario Party Superstars	1	9	6	8	2021	True"),
                 new VideoGames("33	Mario Party 9	1	9	3	6	2016	True"),
+                new VideoGames("34	Rocket League	7	13	50	9	2015	True"),
+                new VideoGames("35	College Love game	6	10	1	10	2021	False"),
             });
 
             modelBuilder.Entity<Publishers>().HasData(new Publishers[]
@@ -102,6 +104,7 @@ namespace E5WBMQ_HFT_2021222.Repository.Data
                 new Publishers("10	Elentronic Arts	1982	Redwood City, CA		7	13000"),
                 new Publishers("11	Sony Interactive Entertainment	1993	Nam Mateo, CA	Sony Corportaion	15	8100"),
                 new Publishers("12	Bandai Namco	1955	Shiba, JP		7.68	662"),
+                new Publishers("13	Epic Games	1991	Cary, NC		32	2200"),
             });
 
             modelBuilder.Entity<Genres>().HasData(new Genres[]
