@@ -32,4 +32,4 @@ namespace E5WBMQ_HFT_2021222.Repository.GenericRepository
         public abstract void Update(T item);
     }
 }
-}
+
