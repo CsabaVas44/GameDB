@@ -35,6 +35,8 @@ namespace E5WBMQ_HFT_2021222.Models
         [Range (0,int.MaxValue)]
         public int NumberOfEmployees { get; set; }
 
+        public virtual ICollection<VideoGames> VideoGames { get; set; }
+
 
         public Publishers()
         {

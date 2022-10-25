@@ -25,7 +25,6 @@ namespace E5WBMQ_HFT_2021222.Models
         [Required]
         [ForeignKey(nameof(Publishers))]
         public int PublisherId { get; set; }
-
         
         public double CopiesSold { get; set; }
 
@@ -36,6 +35,9 @@ namespace E5WBMQ_HFT_2021222.Models
         public int ReleaseYear { get; set; }
 
         public bool Multiplayer { get; set; }
+
+        public virtual Genres Genre { get; set; }
+        public virtual Publishers Publisher { get; set; }
 
 
         public VideoGames()
