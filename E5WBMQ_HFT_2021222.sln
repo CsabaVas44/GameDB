@@ -24,7 +24,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{C307C659-FCAF-4314-B026-2F78987E2A29}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		..\..\..\Desktop\DataBaseContext.txt = ..\..\..\Desktop\DataBaseContext.txt
 	EndProjectSection
 EndProject
 Global
