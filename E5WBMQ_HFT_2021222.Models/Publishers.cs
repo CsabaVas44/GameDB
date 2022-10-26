@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ namespace E5WBMQ_HFT_2021222.Models
             Foundation = int.Parse(split[2]);
             HeadQuarters = split[3];
             ParentCompany = split[4];
-            AnnualSales = int.Parse(split[5]);
+            AnnualSales = double.Parse(split[5],CultureInfo.InvariantCulture);
             NumberOfEmployees = int.Parse(split[6]);
         }
 

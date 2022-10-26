@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,8 +52,8 @@ namespace E5WBMQ_HFT_2021222.Models
             GameName = split[1];
             GenreId = int.Parse(split[2]);
             PublisherId = int.Parse(split[3]);
-            CopiesSold = double.Parse(split[4]);
-            Rating = double.Parse(split[5]);
+            CopiesSold = double.Parse(split[4], CultureInfo.InvariantCulture);
+            Rating = double.Parse(split[5],CultureInfo.InvariantCulture);
             ReleaseYear = int.Parse(split[6]);
             Multiplayer = bool.Parse(split[7]);
         }
