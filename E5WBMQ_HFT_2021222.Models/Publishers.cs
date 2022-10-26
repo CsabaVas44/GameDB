@@ -40,7 +40,7 @@ namespace E5WBMQ_HFT_2021222.Models
 
         public Publishers()
         {
-
+            this.VideoGames = new HashSet<VideoGames>();
         }
         public Publishers(string file)
         {

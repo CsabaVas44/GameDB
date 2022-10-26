@@ -22,7 +22,7 @@ namespace E5WBMQ_HFT_2021222.Models
 
         public Genres()
         {
-
+            this.VideoGames = new HashSet<VideoGames>();
         }
         public Genres(string file)
         {
