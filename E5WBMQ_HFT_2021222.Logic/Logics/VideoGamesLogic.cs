@@ -76,14 +76,13 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
         public double SoldCopiesOfGivenGenre(string name)
         {
             return ReadAll().Where(x => x.Genre.GenreName == name).Sum(x => x.CopiesSold);
-            return all;
 
         }
-        public IQueryable<YearlyData> CopiesSoldByEachPublisher()
+        public IQueryable<PublisherData> CopiesSoldByEachPublisher()
         {
             var result = from g in repo.ReadAll()
                          group g by g.Publisher.PublisherName into g
-                         select new YearlyData
+                         select new PublisherData
                          {
                              Pub = g.Key,
                              Sold = g.Sum(x => x.CopiesSold),
