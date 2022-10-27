@@ -75,7 +75,7 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
         }
         public double SoldCopiesOfGivenGenre(string name)
         {
-            var all = ReadAll().Where(x => x.Genre.GenreName == name).Sum(x => x.CopiesSold);
+            return ReadAll().Where(x => x.Genre.GenreName == name).Sum(x => x.CopiesSold);
             return all;
 
         }
