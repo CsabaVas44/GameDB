@@ -55,15 +55,15 @@ namespace E5WBMQ_HFT_2021222.Models
             NumberOfEmployees = int.Parse(split[6]);
         }
 
-        /*
-         * 
-         * A Model osztályokban legyenek letárolva a
-         * z idegen kulcsok és használjon Navigation
-         * Propertyket LazyLoader-rel ahol lehet! 
-         * A Linq lekérdezésekben akkor használjunk join-t, ha
-         * elkerülhetetlen;
-         * 
-         */
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
 
     }
 }
