@@ -31,16 +31,5 @@ namespace E5WBMQ_HFT_2021222.Models
             GenreName = line[1];
 
         }
-
-
-        public override bool Equals(object? obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
     }
 }

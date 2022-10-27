@@ -57,16 +57,5 @@ namespace E5WBMQ_HFT_2021222.Models
             ReleaseYear = int.Parse(split[6]);
             Multiplayer = bool.Parse(split[7]);
         }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        public override bool Equals(object? obj)
-        {
-            return base.Equals(obj);
-        }
-
     }
 }
