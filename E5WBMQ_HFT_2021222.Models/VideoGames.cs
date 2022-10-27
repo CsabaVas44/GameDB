@@ -60,12 +60,23 @@ namespace E5WBMQ_HFT_2021222.Models
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return HashCode.Combine(this.GameId, this.GenreId,this.PublisherId);
         }
 
         public override bool Equals(object? obj)
         {
-            return base.Equals(obj);
+            VideoGames b = obj as VideoGames;
+
+            if (b == null)
+            {
+                return false;
+            }
+
+            else
+            {
+                return this.GameId == b.GameId && this.GenreId == b.GenreId && this.PublisherId == b.PublisherId;
+                //&& this.GameName == b.GameName && this.GenreId == b.GenreId && this.PublisherId == b.PublisherId && this.CopiesSold == b.CopiesSold && this.Rating == b.Rating && this.ReleaseYear == b.ReleaseYear && this.Multiplayer == b.Multiplayer; 
+            }
         }
 
     }

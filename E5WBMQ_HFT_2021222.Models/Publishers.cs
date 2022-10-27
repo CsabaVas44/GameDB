@@ -20,7 +20,7 @@ namespace E5WBMQ_HFT_2021222.Models
         public string PublisherName { get; set; }
 
         [Required]
-        [Range(1900,2100)]
+        [Range(1900, 2100)]
         public int Foundation { get; set; }
 
         [StringLength(50)]
@@ -29,11 +29,11 @@ namespace E5WBMQ_HFT_2021222.Models
         [StringLength(50)]
         public string ParentCompany { get; set; }
 
-        [Range(0,double.MaxValue)]
+        [Range(0, double.MaxValue)]
         public double AnnualSales { get; set; }
 
-       
-        [Range (0,int.MaxValue)]
+
+        [Range(0, int.MaxValue)]
         public int NumberOfEmployees { get; set; }
 
         public virtual ICollection<VideoGames> VideoGames { get; set; }
@@ -51,19 +51,29 @@ namespace E5WBMQ_HFT_2021222.Models
             Foundation = int.Parse(split[2]);
             HeadQuarters = split[3];
             ParentCompany = split[4];
-            AnnualSales = double.Parse(split[5],CultureInfo.InvariantCulture);
+            AnnualSales = double.Parse(split[5], CultureInfo.InvariantCulture);
             NumberOfEmployees = int.Parse(split[6]);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return HashCode.Combine(this.PublisherId, this.PublisherName, this.Foundation);
         }
 
         public override bool Equals(object? obj)
         {
-            return base.Equals(obj);
-        }
+            Publishers b = obj as Publishers;
 
+            if (b == null)
+            {
+                return false;
+            }
+
+            else
+            {
+                return this.PublisherId == b.PublisherId && this.PublisherName == b.PublisherName && this.Foundation == b.Foundation;
+            }
+
+        }
     }
 }
