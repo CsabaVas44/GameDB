@@ -94,6 +94,25 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
         {
             public string Pub { get; set; }
             public double Sold { get; set; }
+
+            public override bool Equals(object? obj)
+            {
+                PublisherData b = obj as PublisherData;
+
+                if (b == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.Sold == b.Sold && this.Pub == b.Pub;
+                    
+                }
+            }
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(this.Pub, this.Sold);
+            }
         }
 
         public class GenreData
