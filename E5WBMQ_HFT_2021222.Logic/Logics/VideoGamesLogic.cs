@@ -90,7 +90,7 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
             return result;
         }
 
-        public class YearlyData
+        public class PublisherData
         {
             public string Pub { get; set; }
             public double Sold { get; set; }
