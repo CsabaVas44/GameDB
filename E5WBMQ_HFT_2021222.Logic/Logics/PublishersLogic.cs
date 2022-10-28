@@ -20,6 +20,14 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
 
         public void Create(Publishers item)
         {
+            if (item.NumberOfEmployees < 1)
+            {
+                throw new ArgumentException("Number of Employees has to greater than 0...!");
+            }
+            if (item.AnnualSales < 0 )
+            {
+                throw new ArgumentException("Number of sales has to be at least 0...!");
+            }
             this.repo.Create(item);
         }
 
