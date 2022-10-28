@@ -32,7 +32,7 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
         }
 
         public void Delete(int id)
-        {
+        {  
             this.repo.Delete(id);
         }
 
@@ -109,7 +109,7 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
                 }
                 else
                 {
-                    return this.Sold == b.Sold && this.Pub == b.Pub;
+                    return this.Sold == b.Sold && this.Pub == b.Pub;  
                 }
             }
             public override int GetHashCode()
@@ -117,7 +117,7 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
                 return HashCode.Combine(this.Pub, this.Sold);
             }
         }
-
+            
         public class GenreData
         {
             public string Name { get; set; }
