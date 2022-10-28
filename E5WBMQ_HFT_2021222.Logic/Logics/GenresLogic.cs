@@ -49,6 +49,10 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
 
         public void Update(Genres item)
         {
+            if (item.GenreName.Length < 2)
+            {
+                throw new ArgumentException("Genre name cannot be updated to something of that length...!");
+            }
             this.repo.Update(item);
         }
     }
