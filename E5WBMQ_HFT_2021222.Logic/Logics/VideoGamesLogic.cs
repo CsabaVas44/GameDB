@@ -24,6 +24,10 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
 
         public void Create(VideoGames item)
         {
+            if (item.GameName.Length < 2)
+            {
+                throw new ArgumentException("Video Game Title is too short...");
+            }
             this.repo.Create(item);
         }
 
@@ -34,7 +38,7 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
 
         public VideoGames Read(int id)
         {
-            return this.repo.Read(id);
+            return this.repo.Read(id) ?? throw new ArgumentException("Video Games with the given ID does not exist.");
         }
 
         public IQueryable<VideoGames> ReadAll()
@@ -106,7 +110,6 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
                 else
                 {
                     return this.Sold == b.Sold && this.Pub == b.Pub;
-                    
                 }
             }
             public override int GetHashCode()
@@ -121,12 +124,6 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
             public double Copies { get; set; }
         }
 
-    
-           
-
-
-        //mik azok a játékok, amiket ugyanaz a publisher adott ki? --> random game --> ha ez megvan kiírom annak a publishernek a többi játékát
-        //Évek szerint eladott játékok?
 
     }
 }
