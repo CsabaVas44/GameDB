@@ -39,7 +39,7 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
 
         public Genres Read(int id)
         {
-            return this.repo.Read(id);
+            return this.repo.Read(id) ?? throw new ArgumentException("Genre with the given id does not exist...!");
         }
 
         public IQueryable<Genres> ReadAll()
