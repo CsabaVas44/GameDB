@@ -2,14 +2,8 @@
 using E5WBMQ_HFT_2021222.Logic.Logics;
 using E5WBMQ_HFT_2021222.Models;
 using E5WBMQ_HFT_2021222.Repository.GenericRepository;
-using E5WBMQ_HFT_2021222.Repository.ModelRepositories;
 using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static E5WBMQ_HFT_2021222.Logic.Logics.VideoGamesLogic;
 
 namespace E5WBMQ_HFT_2021222.Test
@@ -114,8 +108,6 @@ namespace E5WBMQ_HFT_2021222.Test
             Assert.That(result, Is.EqualTo(20));
         }
 
-
-        //TODO
         [Test]
         public void TestCopiesSoldByEachPublisher()
         {
