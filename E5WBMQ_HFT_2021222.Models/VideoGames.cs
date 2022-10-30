@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace E5WBMQ_HFT_2021222.Models
@@ -19,12 +20,8 @@ namespace E5WBMQ_HFT_2021222.Models
         [StringLength(50)]
         public string GameName { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(Genres))]
         public int GenreId { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(Publishers))]
         public int PublisherId { get; set; }
         
         public double CopiesSold { get; set; }
@@ -32,7 +29,6 @@ namespace E5WBMQ_HFT_2021222.Models
         [Range(0,10)]
         public double Rating { get; set; }
 
-        [Range(1900,2100)]
         public int ReleaseYear { get; set; }
 
         public bool Multiplayer { get; set; }
