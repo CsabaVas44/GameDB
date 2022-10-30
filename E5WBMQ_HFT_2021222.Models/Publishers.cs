@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace E5WBMQ_HFT_2021222.Models
@@ -20,7 +21,6 @@ namespace E5WBMQ_HFT_2021222.Models
         public string PublisherName { get; set; }
 
         [Required]
-        [Range(1900, 2100)]
         public int Foundation { get; set; }
 
         [StringLength(50)]
@@ -33,6 +33,7 @@ namespace E5WBMQ_HFT_2021222.Models
 
         public int NumberOfEmployees { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<VideoGames> VideoGames { get; set; }
 
 
@@ -56,7 +57,6 @@ namespace E5WBMQ_HFT_2021222.Models
         {
             return HashCode.Combine(this.PublisherId, this.PublisherName, this.Foundation);
         }
-
         public override bool Equals(object? obj)
         {
             Publishers b = obj as Publishers;
