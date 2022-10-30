@@ -15,9 +15,10 @@ namespace E5WBMQ_HFT_2021222.Models
         public int GenreId { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string GenreName { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<VideoGames> VideoGames { get; set; }
 
         public Genres()
