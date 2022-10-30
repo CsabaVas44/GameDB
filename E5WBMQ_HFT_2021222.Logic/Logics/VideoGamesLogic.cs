@@ -1,4 +1,4 @@
-﻿using E5WBMQ_HFT_2021222.Logic.LogicInterfaces;
+﻿using E5WBMQ_HFT_2021222.Logic;
 using E5WBMQ_HFT_2021222.Models;
 using E5WBMQ_HFT_2021222.Repository.Data;
 using E5WBMQ_HFT_2021222.Repository.GenericRepository;
@@ -57,7 +57,6 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
         {
             return ReadAll().Where(x => x.PublisherId == id).Average(x => x.CopiesSold);
         }
-
         public Publishers OldestGameReleasedByPublisher()
         {
             var games = ReadAll();
