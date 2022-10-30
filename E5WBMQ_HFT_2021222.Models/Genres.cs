@@ -29,10 +29,7 @@ namespace E5WBMQ_HFT_2021222.Models
             string[] line = file.Split('\u0009');
             GenreId = int.Parse(line[0]);
             GenreName = line[1];
-
         }
-
-
         public override bool Equals(object? obj)
         {
             Genres b = obj as Genres;
@@ -46,7 +43,6 @@ namespace E5WBMQ_HFT_2021222.Models
                 return this.GenreId == b.GenreId && this.GenreName == b.GenreName;
             }
         }
-
         public override int GetHashCode()
         {
             return HashCode.Combine(this.GenreId, this.GenreName);
