@@ -20,6 +20,7 @@ namespace E5WBMQ_HFT_2021222.Models
         public string GenreName { get; set; }
 
         [JsonIgnore]
+        [NotMapped]
         public virtual ICollection<VideoGames> VideoGames { get; set; }
 
         public Genres()

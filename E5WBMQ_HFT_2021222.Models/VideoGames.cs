@@ -33,7 +33,9 @@ namespace E5WBMQ_HFT_2021222.Models
 
         public bool Multiplayer { get; set; }
 
+        [NotMapped]
         public virtual Genres Genre { get; set; }
+        [NotMapped]
         public virtual Publishers Publisher { get; set; }
 
 
