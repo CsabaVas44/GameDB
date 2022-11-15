@@ -24,11 +24,6 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
             {
                 throw new ArgumentException("Genre name too short...!");
             }
-            else if (item.GenreId == null)
-            {
-                throw new ArgumentException("Primary key cannot be null...!");
-            }
-
             this.repo.Create(item);
         }
 
