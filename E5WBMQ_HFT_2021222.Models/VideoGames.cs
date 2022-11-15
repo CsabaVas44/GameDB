@@ -20,8 +20,10 @@ namespace E5WBMQ_HFT_2021222.Models
         [StringLength(50)]
         public string? GameName { get; set; }
 
+        [ForeignKey(nameof(Genres))] 
         public int GenreId { get; set; }
 
+        [ForeignKey(nameof(Publishers))]
         public int PublisherId { get; set; }
         
         public double CopiesSold { get; set; }
