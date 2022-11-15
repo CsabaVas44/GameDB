@@ -33,6 +33,10 @@ namespace E5WBMQ_HFT_2021222.Models
             GenreId = int.Parse(line[0]);
             GenreName = line[1];
         }
+        public Genres()
+        {
+            VideoGames = new HashSet<VideoGames>();
+        }
         public override bool Equals(object? obj)
         {
             Genres b = obj as Genres;
