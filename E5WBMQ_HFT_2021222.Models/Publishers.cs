@@ -24,10 +24,10 @@ namespace E5WBMQ_HFT_2021222.Models
         public int Foundation { get; set; }
 
         [StringLength(50)]
-        public string HeadQuarters { get; set; }
+        public string? HeadQuarters { get; set; }
 
         [StringLength(50)]
-        public string ParentCompany { get; set; }
+        public string? ParentCompany { get; set; }
 
         public double AnnualSales { get; set; }
 
@@ -35,8 +35,7 @@ namespace E5WBMQ_HFT_2021222.Models
 
         [JsonIgnore]
         [NotMapped]
-        public virtual ICollection<VideoGames> VideoGames { get; set; }
-
+        public virtual HashSet<VideoGames>? VideoGames { get; set; }
 
         public Publishers()
         {

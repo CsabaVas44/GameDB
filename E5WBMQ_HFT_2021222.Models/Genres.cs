@@ -17,11 +17,11 @@ namespace E5WBMQ_HFT_2021222.Models
 
         [Required]
         [StringLength(100)]
-        public string GenreName { get; set; }
+        public string? GenreName { get; set; }
 
         [JsonIgnore]
         [NotMapped]
-        public virtual ICollection<VideoGames> VideoGames { get; set; }
+        public virtual HashSet<VideoGames>? VideoGames { get; set; }
 
         public Genres()
         {

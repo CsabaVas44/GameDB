@@ -18,7 +18,7 @@ namespace E5WBMQ_HFT_2021222.Models
 
         [Required]
         [StringLength(50)]
-        public string GameName { get; set; }
+        public string? GameName { get; set; }
 
         public int GenreId { get; set; }
 
@@ -31,13 +31,12 @@ namespace E5WBMQ_HFT_2021222.Models
 
         public int ReleaseYear { get; set; }
 
-        public bool Multiplayer { get; set; }
+        public bool? Multiplayer { get; set; }
 
         [NotMapped]
-        public virtual Genres Genre { get; set; }
+        public virtual Genres? Genre { get; set; }
         [NotMapped]
-        public virtual Publishers Publisher { get; set; }
-
+        public virtual Publishers? Publisher { get; set; }
 
         public VideoGames()
         {
@@ -63,7 +62,7 @@ namespace E5WBMQ_HFT_2021222.Models
 
         public override bool Equals(object? obj)
         {
-            VideoGames b = obj as VideoGames;
+            VideoGames? b = obj as VideoGames;
 
             if (b == null)
             {
