@@ -23,10 +23,7 @@ namespace E5WBMQ_HFT_2021222.Models
         [NotMapped]
         public virtual HashSet<VideoGames>? VideoGames { get; set; }
 
-        public Genres()
-        {
-            this.VideoGames = new HashSet<VideoGames>();
-        }
+     
         public Genres(string file)
         {
             string[] line = file.Split('\u0009');
