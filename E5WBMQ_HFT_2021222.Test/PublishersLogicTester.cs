@@ -72,5 +72,20 @@ namespace E5WBMQ_HFT_2021222.Test
             catch { }
             mockPublishersRepository.Verify(x => x.Create(pub), Times.Never);
         }
+
+        [Test]
+        public void TestCreatePublishersWithCorrectNumberOfEmployees()
+        {
+            var pub = new Publishers()
+            {
+                PublisherId = 1,
+                PublisherName = "Bandai Namco",
+                NumberOfEmployees = 5000,
+                Foundation = 1950,
+            };
+            try { pl.Create(pub); }
+            catch { }
+            mockPublishersRepository.Verify(x => x.Create(pub), Times.Once);
+        }
     }
 }
