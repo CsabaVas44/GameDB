@@ -29,8 +29,10 @@ namespace E5WBMQ_HFT_2021222.Models
         [StringLength(50)]
         public string? ParentCompany { get; set; }
 
+        [Range(0, double.MaxValue)]
         public double AnnualSales { get; set; }
 
+        [Range(1,int.MaxValue)]
         public int NumberOfEmployees { get; set; }
 
         [JsonIgnore]
