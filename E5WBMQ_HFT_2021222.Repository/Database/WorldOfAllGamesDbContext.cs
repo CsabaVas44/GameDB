@@ -120,6 +120,8 @@ namespace E5WBMQ_HFT_2021222.Repository.Data
                 new Genres("9	MMORPG"),
                 new Genres("10	SANDBOX"),
                 new Genres("11	Virtual Reality"),
+                new Genres("12	Action-Adventure"),
+                new Genres("13	Family"),
             });
         }
 
