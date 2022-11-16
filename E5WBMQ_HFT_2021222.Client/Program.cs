@@ -1,10 +1,11 @@
 ﻿using ConsoleTools;
 using E5WBMQ_HFT_2021222.Client;
 using E5WBMQ_HFT_2021222.Models;
+using System.Globalization;
 
-RestService rest;
 
-rest = new RestService("http://localhost:5011/", "videogames");
+RestService rest = new("http://localhost:5011/", "genres");
+
 
 var videogamesSubMenu = new ConsoleMenu(args, level: 1)
     .Add("List", () => List("VideoGames"))
@@ -40,32 +41,43 @@ void Create(string entity)
 {
     if (entity == "VideoGames")
     {
-
+        Console.Write("Enter VideoGame Name: ");
         string name = Console.ReadLine();
-        int gen = int.Parse(Console.ReadLine());
+
+        Console.Write("GenreId:");
+        int genre = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter Publisher Id: ");
         int pub = int.Parse(Console.ReadLine());
 
-        rest.Post(
-            new VideoGames() { GameName = name, GenreId = gen, PublisherId = pub }, "videogames");
-    }
 
+        rest.Post(new VideoGames()
+        {
+            GameName = name,
+            GenreId = genre,
+            PublisherId = pub,
+
+        }, "videogames/create");
+    }
     if (entity == "Publishers")
     {
-
         Console.Write("Enter Publisher Name: ");
         string name = Console.ReadLine();
 
         Console.Write("Enter Pub Foundation:");
         int foundation = int.Parse(Console.ReadLine());
 
-        rest.Post(new Publishers() { PublisherName = name, Foundation = foundation}, "publishers");
 
+        rest.Post(new Publishers() {
+            PublisherName = name,
+            Foundation = foundation, }, "publishers");
     }
 
     if (entity == "Genres")
     {
         Console.Write("Enter Genre Name: ");
         string name = Console.ReadLine();
+
         rest.Post(new Genres() { GenreName = name }, "genres");
     }
 
@@ -74,7 +86,7 @@ void List(string entity)
     {
         if (entity == "VideoGames")
         {
-            List<VideoGames> games = rest.Get<VideoGames>("videogames");
+            List<VideoGames> games = rest.Get<VideoGames>("videogames/readall");
             foreach (var item in games)
             {
                 Console.WriteLine(item.GameId + ": " + item.GameName);
@@ -107,13 +119,13 @@ void Update(string entity)
             Console.Write("Enter Video Game's id to update: ");
             int id = int.Parse(Console.ReadLine());
 
-            VideoGames update = rest.Get<VideoGames>(id, "videogames");
+            VideoGames update = rest.Get<VideoGames>(id, "videogames/read");
 
             Console.Write($"New name [old: {update.GameName}]: ");
             string name = Console.ReadLine();
             update.GameName = name;
 
-            rest.Put(update, "videogames");
+            rest.Put(update, "videogames/update");
         }
 
         if (entity == "Publishers")
@@ -148,9 +160,9 @@ void Delete(string entity)
     {
         if (entity == "VideoGames")
         {
-            Console.Write("Enter Actor's id to delete: ");
+            Console.Write("Enter VideoGame's id to delete: ");
             int id = int.Parse(Console.ReadLine());
-            rest.Delete(id, "videogames");
+            rest.Delete(id, "videogames/delete");
         }
         if (entity == "Publishers")
         {
