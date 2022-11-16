@@ -1,8 +1,11 @@
-﻿using E5WBMQ_HFT_2021222.Logic.Logics;
+﻿using Castle.Components.DictionaryAdapter;
+using E5WBMQ_HFT_2021222.Logic.Logics;
 using E5WBMQ_HFT_2021222.Models;
 using E5WBMQ_HFT_2021222.Repository.GenericRepository;
 using Moq;
 using NUnit.Framework;
+using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
 using static E5WBMQ_HFT_2021222.Logic.Logics.VideoGamesLogic;
 
 namespace E5WBMQ_HFT_2021222.Test
@@ -17,7 +20,6 @@ namespace E5WBMQ_HFT_2021222.Test
         [SetUp]
         public void Init()
         {
-        
             var genres = new List<Genres>()
             {
                 new Genres()
@@ -49,8 +51,6 @@ namespace E5WBMQ_HFT_2021222.Test
                     NumberOfEmployees = 1500,
                 },
             };
-
-
             var games = new List<VideoGames>()
             {
                 new VideoGames()
@@ -78,7 +78,7 @@ namespace E5WBMQ_HFT_2021222.Test
                 new VideoGames()
                 {
                     GameId = 3,
-                    GameName = "Magic Mike: The Quest for the Majestic Big Blue Balls",
+                    GameName = "Magic Mayhem: The Quest for the Majestic Staff of Lies",
                     GenreId = 1,
                     PublisherId = 2,
                     CopiesSold = 30,
@@ -103,30 +103,28 @@ namespace E5WBMQ_HFT_2021222.Test
         [Test]
         public void TestAverageSoldCopiesByPublisher()
         {
-            var result = vgl.AverageSoldCopiesByPublisher(1);  
+            var result = vgl.AverageSoldCopiesByPublisher("Bandai Namco");  
             Assert.That(result, Is.EqualTo(20));
+        }
+
+        [Test]
+        public void TestAverageSoldCopiesByIncorrectPublisher()
+        {
+            Assert.Throws<InvalidOperationException>(() => vgl.AverageSoldCopiesByPublisher("NotARealPublisher"));
         }
 
         [Test]
         public void TestCopiesSoldByEachPublisher()
         {
             var result = vgl.CopiesSoldByEachPublisher();
-            ;
-            var expected = new List<PublisherData>()
+
+            var expected = new List<KeyValuePair<string, double>>()
             {
-                new PublisherData()
-                {
-                    Pub = "Bandai Namco",
-                    Sold = 40,
-                },
-                new PublisherData()
-                {
-                    Pub = "Electronic Arts",
-                    Sold = 30,
-                },
-            }.AsQueryable();
-            ;
-            Assert.AreEqual(expected, result);
+                new KeyValuePair<string, double>("Bandai Namco", 40),
+                new KeyValuePair<string, double>("Electronic Arts", 30)
+            };
+
+            Assert.That(result, Is.EqualTo(expected));
         }
         [Test]
         public void TestMostPopularGenre()
@@ -136,16 +134,13 @@ namespace E5WBMQ_HFT_2021222.Test
             Assert.That(result, Is.EqualTo("RPG"));
         }
         [Test]
-        public void TestOldestGameReleasedByPublisher()
+        public void TestOldestGameReleasedBy()
         {
-
             var expected = new Publishers()
             {
-                PublisherId = 1,
-                Foundation = 1995,
                 PublisherName = "Electronic Arts"
             };
-            var result = vgl.OldestGameReleasedByPublisher().PublisherName;
+            var result = vgl.OldestGameReleasedByWhom();
             Assert.That(result, Is.EqualTo(expected.PublisherName));
         }
         [Test]
@@ -155,6 +150,22 @@ namespace E5WBMQ_HFT_2021222.Test
             var result = vgl.SoldCopiesOfGivenGenre("RPG");
 
             Assert.That(result, Is.EqualTo(40));
+
+        }
+
+        [Test]
+        public void TestNumberOfGamesPerGenre()
+        {
+            var result = vgl.NumberOfGamesPerGenre();
+
+            var expected = new List<KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>("RPG", 2),
+                new KeyValuePair<string, int>("Action", 1)
+            };
+
+            Assert.That(result, Is.EqualTo(expected));
+
 
         }
 
@@ -212,6 +223,43 @@ namespace E5WBMQ_HFT_2021222.Test
 
         }
 
+        [Test]
+        public void TestAllOfTheSameGenre()
+        {
+
+            var expected = new List<VideoGames>()
+            {
+                new VideoGames()
+                {
+                    GameId = 1,
+                    GameName = "Elden Ring",
+                    GenreId = 2,
+                    PublisherId = 1,
+                },
+                new VideoGames()
+                {
+                    GameId = 2,
+                    GameName = "Dark Souls 3",
+                    GenreId = 2,
+                    PublisherId = 1,
+                },
+            }.AsQueryable();
+
+            var result = vgl.AllOfTheSameGenre("RPG");
+
+            Assert.That(result, Is.EqualTo(expected));
+
+        }
+
+        [Test]
+        public void TestGenrePerGame()
+        {
+            var expected = new List<string> { "Elden Ring", "Dark Souls 3" };
+
+            var result = vgl.GenrePerGame("Dark Souls 3");
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
 
 
 

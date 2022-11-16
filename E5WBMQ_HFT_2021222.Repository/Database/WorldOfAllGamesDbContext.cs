@@ -101,7 +101,7 @@ namespace E5WBMQ_HFT_2021222.Repository.Data
                 new Publishers("7	Rockstar Games	1998	New York, NY	Take-Two Interactive	1.5	2500"),
                 new Publishers("8	Sega	1960	Tokyo, JP		5	3300"),
                 new Publishers("9	Nintendo	1889	Kyoto, JP		15	6000"),
-                new Publishers("10	Elentronic Arts	1982	Redwood City, CA		7	13000"),
+                new Publishers("10	Electronic Arts	1982	Redwood City, CA		7	13000"),
                 new Publishers("11	Sony Interactive Entertainment	1993	Nam Mateo, CA	Sony Corportaion	15	8100"),
                 new Publishers("12	Bandai Namco	1955	Shiba, JP		7.68	662"),
                 new Publishers("13	Epic Games	1991	Cary, NC		32	2200"),

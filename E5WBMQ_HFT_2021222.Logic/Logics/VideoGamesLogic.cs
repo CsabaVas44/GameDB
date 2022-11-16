@@ -53,76 +53,54 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
 
 
         //NON-CRUDS
-        public double AverageSoldCopiesByPublisher(int id)
+        public double AverageSoldCopiesByPublisher(string name)
         {
-            return ReadAll().Where(x => x.PublisherId == id).Average(x => x.CopiesSold);
-        }
-        public Publishers OldestGameReleasedByPublisher()
-        {
-            var games = ReadAll();
-            var gamesWithMinYear = games.Min(x => x.ReleaseYear);
-            var result = games.Where(x => x.ReleaseYear == gamesWithMinYear);
-            return result.First().Publisher;
-        }
-        public string MostPopularGenre()
-        {
-            var result = from g in repo.ReadAll()
-                         group g by g.Genre.GenreName into g
-                         select new GenreData
-                         {
-                             Name = g.Key,
-                             Copies = g.Sum(x => x.CopiesSold)
-                         };
-            return result.OrderBy(x => x.Copies).Reverse().First().Name;
+            //return ReadAll().Where(x => x.PublisherId == id).Average(x => x.CopiesSold);
 
+            return ReadAll().Where(x => x.Publisher.PublisherName == name).Average(x => x.CopiesSold);
+
+
+        }
+        public string? OldestGameReleasedByWhom()
+        {
+
+            return ReadAll().Where(x => x.ReleaseYear == ReadAll().Select(x => x.ReleaseYear).Min())
+                            .Select(x => x.Publisher.PublisherName)
+                            .FirstOrDefault();
+        }
+        public string? MostPopularGenre()
+        {
+            return ReadAll().GroupBy(x => x.Genre.GenreName)
+                .Select(x => new
+                {
+                    Name = x.Key,
+                    Copies = x.Sum(x => x.CopiesSold),
+                }).OrderByDescending(x => x.Copies).First().Name;
         }
         public double SoldCopiesOfGivenGenre(string name)
         {
             return ReadAll().Where(x => x.Genre.GenreName == name).Sum(x => x.CopiesSold);
 
         }
-        public IQueryable<PublisherData> CopiesSoldByEachPublisher()
+        public IEnumerable<KeyValuePair<string, double>> CopiesSoldByEachPublisher()
         {
-            var result = from g in repo.ReadAll()
-                         group g by g.Publisher.PublisherName into g
-                         select new PublisherData
-                         {
-                             Pub = g.Key,
-                             Sold = g.Sum(x => x.CopiesSold),
-                         };
-            return result;
+            return ReadAll().GroupBy(x => x.Publisher.PublisherName)
+                .Select(x => new KeyValuePair<string, double>(x.Key, x.Sum(x => x.CopiesSold)));
+        }
+        public IEnumerable<KeyValuePair<string, int>> NumberOfGamesPerGenre()
+        {
+            return ReadAll().GroupBy(x => x.Genre.GenreName)
+                .Select(x => new KeyValuePair<string, int>(x.Key, x.Count()));
         }
 
-        public class PublisherData
+        public IQueryable<VideoGames> AllOfTheSameGenre(string genre)
         {
-            public string Pub { get; set; }
-            public double Sold { get; set; }
-
-            public override bool Equals(object? obj)
-            {
-                PublisherData b = obj as PublisherData;
-
-                if (b == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return this.Sold == b.Sold && this.Pub == b.Pub;  
-                }
-            }
-            public override int GetHashCode()
-            {
-                return HashCode.Combine(this.Pub, this.Sold);
-            }
-        }
-            
-        public class GenreData
-        {
-            public string Name { get; set; }
-            public double Copies { get; set; }
+            return ReadAll().Where(x => x.Genre.GenreName == genre).AsQueryable();
         }
 
-
+        public List<string> GenrePerGame(string gameName)
+        {
+            return (List<string>)ReadAll().Where(x => x.Genre.GenreId == ReadAll().Where(x => x.GameName == gameName).Select(x => x.Genre.GenreId).First()).Select(x => x.GameName).ToList();
+        }
     }
 }
