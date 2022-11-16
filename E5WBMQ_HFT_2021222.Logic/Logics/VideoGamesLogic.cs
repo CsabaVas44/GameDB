@@ -21,7 +21,6 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
         {
             this.repo = repo;
         }
-
         public void Create(VideoGames item)
         {
             if (item.GameName.Length < 2)
@@ -30,28 +29,22 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
             }
             this.repo.Create(item);
         }
-
         public void Delete(int id)
         {  
             this.repo.Delete(id);
         }
-
         public VideoGames Read(int id)
         {
             return this.repo.Read(id) ?? throw new ArgumentException("Video Games with the given ID does not exist.");
         }
-
         public IQueryable<VideoGames> ReadAll()
         {
             return this.repo.ReadAll();
         }
-
         public void Update(VideoGames item)
         {
             this.repo.Update(item);
         }
-
-
         //NON-CRUDS
         public double AverageSoldCopiesByPublisher(string name)
         {
@@ -92,12 +85,10 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
             return ReadAll().GroupBy(x => x.Genre.GenreName)
                 .Select(x => new KeyValuePair<string, int>(x.Key, x.Count()));
         }
-
         public IQueryable<VideoGames> AllOfTheSameGenre(string genre)
         {
             return ReadAll().Where(x => x.Genre.GenreName == genre).AsQueryable();
         }
-
         public List<string> GenrePerGame(string gameName)
         {
             return (List<string>)ReadAll().Where(x => x.Genre.GenreId == ReadAll().Where(x => x.GameName == gameName).Select(x => x.Genre.GenreId).First()).Select(x => x.GameName).ToList();
