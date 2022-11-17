@@ -48,11 +48,7 @@ namespace E5WBMQ_HFT_2021222.Logic.Logics
         //NON-CRUDS
         public double AverageSoldCopiesByPublisher(string name)
         {
-            //return ReadAll().Where(x => x.PublisherId == id).Average(x => x.CopiesSold);
-
             return ReadAll().Where(x => x.Publisher.PublisherName == name).Average(x => x.CopiesSold);
-
-
         }
         public string? OldestGameReleasedByWhom()
         {
