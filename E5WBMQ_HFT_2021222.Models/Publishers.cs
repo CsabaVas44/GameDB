@@ -33,7 +33,7 @@ namespace E5WBMQ_HFT_2021222.Models
         public double? AnnualSales { get; set; }
 
         [Range(1,int.MaxValue)]
-        public int? NumberOfEmployees { get; set; }
+        public int NumberOfEmployees { get; set; }
 
         [JsonIgnore]
         [NotMapped]
