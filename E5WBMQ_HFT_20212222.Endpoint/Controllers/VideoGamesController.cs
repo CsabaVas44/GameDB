@@ -52,7 +52,7 @@ namespace E5WBMQ_HFT_20212222.Endpoint.Controllers
         }
 
         [HttpGet]
-        public string OldesGameReleasedByWhom()
+        public string OldestGameReleasedByWhom()
         {
             return this.logic.OldestGameReleasedByWhom();
         }
@@ -80,10 +80,10 @@ namespace E5WBMQ_HFT_20212222.Endpoint.Controllers
             return this.logic.AllOfTheSameGenre(name);
         }
 
-        [HttpGet("gameName")]
-        public List<string> GenrePerGame(string gameName)
+        [HttpGet("name")]
+        public List<string> GenrePerGame(string name)
         {
-            return this.logic.GenrePerGame(gameName);
+            return this.logic.GenrePerGame(name);
         }
 
     }
