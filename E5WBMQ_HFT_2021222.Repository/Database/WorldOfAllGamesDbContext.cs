@@ -45,11 +45,11 @@ namespace E5WBMQ_HFT_2021222.Repository.Data
             .OnDelete(DeleteBehavior.Cascade);
 
 
-            modelBuilder.Entity<VideoGames>(games => games
+            modelBuilder.Entity<VideoGames>()
             .HasOne(games => games.Genre)
             .WithMany(genre => genre.VideoGames)
             .HasForeignKey(games => games.GenreId)
-            .OnDelete(DeleteBehavior.Cascade));
+            .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<VideoGames>().HasData(new Models.VideoGames[]
             {
