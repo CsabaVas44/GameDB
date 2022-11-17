@@ -38,11 +38,11 @@ namespace E5WBMQ_HFT_2021222.Repository.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<VideoGames>(games => games
+            modelBuilder.Entity<VideoGames>()
             .HasOne(games => games.Publisher)
             .WithMany(publisher => publisher.VideoGames)
             .HasForeignKey(games => games.PublisherId)
-            .OnDelete(DeleteBehavior.Cascade));
+            .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<VideoGames>(games => games
