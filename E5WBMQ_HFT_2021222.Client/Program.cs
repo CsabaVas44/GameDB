@@ -2,16 +2,27 @@
 using E5WBMQ_HFT_2021222.Client;
 using E5WBMQ_HFT_2021222.Models;
 using System.Globalization;
-
+using System.Security.Cryptography;
 
 RestService rest = new("http://localhost:5011/", "genres");
 
+var videogamesNonCrudMenu = new ConsoleMenu(args, level: 2)
+    .Add("Which Publisher released the oldest game of the bunch?", () => NonCruds("OldestGameReleasedByWhom")) 
+    .Add("Which genre has sold the most copies, (therefore making it the most popular)?", () => NonCruds("MostPopularGenre")) 
+    .Add("About how much was sold of a given genre (eg. RPG)", () => NonCruds("SoldCopiesOfGivenGenre")) 
+    .Add("Which games have the same genre as this game (eg Hades)", () => NonCruds("GenrePerGame")) 
+    .Add("Which games are of this given genre? (eg. RPG)", () => NonCruds("AllOfTheSameGenre")) 
+    .Add("How many copies has the given publisher sold on average?", () => NonCruds("AverageSoldCopiesByPublisher"))
+    .Add("How many copies of games has each publisher sold on average?", () => NonCruds("CopiesSoldByEachPublisher"))
+    .Add("How many games are there of each genre?", () => NonCruds("NumberOfGamesPerGenre"))
+    .Add("Exit", ConsoleMenu.Close);
 
 var videogamesSubMenu = new ConsoleMenu(args, level: 1)
     .Add("List", () => List("VideoGames"))
     .Add("Create", () => Create("VideoGames"))
     .Add("Delete", () => Delete("VideoGames"))
     .Add("Update", () => Update("VideoGames"))
+    .Add("Queries", () => videogamesNonCrudMenu.Show())
     .Add("Exit", ConsoleMenu.Close);
 
 var publishersSubMenu = new ConsoleMenu(args, level: 1)
@@ -33,7 +44,7 @@ var menu = new ConsoleMenu(args, level: 0)
     .Add("Publishers", () => publishersSubMenu.Show())
     .Add("Genres", () => genresSubMenu.Show())
     .Add("Exit", ConsoleMenu.Close);
-
+menu.Show();
 
 menu.Show();
 
@@ -176,4 +187,72 @@ void Delete(string entity)
             int id = int.Parse(Console.ReadLine());
             rest.Delete(id, "genres");
         }
+}
+void NonCruds(string name)
+{
+    if (name == "OldestGameReleasedByWhom")
+    {
+        string oldest = rest.GetSingle<string>("videogames/OldestGameReleasedByWhom");
+        Console.WriteLine(oldest);
+        Console.ReadLine();
+    }
+    if (name == "MostPopularGenre")
+    {
+        string popular = rest.GetSingle<string>("videogames/MostPopularGenre");
+        Console.WriteLine(popular);
+        Console.ReadLine();
+    }
+    if (name == "SoldCopiesOfGivenGenre")
+    {
+        Console.WriteLine("Given Genre: (eg. RPG) ");
+        string genre = Console.ReadLine();
+        var sold = rest.GetByName<double>(genre,"videogames/SoldCopiesOfGivenGenre");
+        Console.WriteLine(sold);
+        Console.ReadLine();
+    }
+    if (name == "GenrePerGame")
+    {
+        Console.WriteLine("Given Game (eg. Hades)");
+        string gameName = Console.ReadLine();
+        var springyThing = rest.GetMany<string>("videogames/GenrePerGame", gameName);
+        springyThing.ForEach(x => Console.WriteLine(x));
+        Console.ReadLine();
+    }
+    if (name == "AllOfTheSameGenre")
+    {
+        Console.WriteLine("Given Genre: (eg. RPG)");
+        string genre = Console.ReadLine();
+        var all = rest.GetMany<VideoGames>("videogames/AllOfTheSameGenre", genre);
+        foreach (var item in all)
+        {
+            Console.WriteLine(item.GameName);
+        }
+        Console.ReadLine();
+    }
+    if (name == "AverageSoldCopiesByPublisher")
+    {
+        Console.WriteLine("Given Publisher (eg. Electronic Arts)");
+        var pub = Console.ReadLine();
+        var back = rest.GetByName<double>(pub, "videogames/AverageSoldCopiesByPublisher");
+        Console.WriteLine(back);
+        Console.ReadLine();
+    }
+    if (name == "CopiesSoldByEachPublisher")
+    {
+        var back = rest.GetKeys<string,double>("videogames/CopiesSoldByEachPublisher");
+        foreach (var item in back)
+        {
+            Console.WriteLine(item);
+        }
+        Console.ReadLine();
+    }
+    if (name == "NumberOfGamesPerGenre")
+    {
+        var back = rest.GetKeys<string, int>("videogames/NumberOfGamesPerGenre");
+        foreach (var item in back)
+        {
+            Console.WriteLine(item);
+        }
+        Console.ReadLine();
+    }
 }
