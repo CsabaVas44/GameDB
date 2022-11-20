@@ -68,11 +68,6 @@ namespace E5WBMQ_HFT_20212222.Endpoint.Controllers
             return this.logic.SoldCopiesOfGivenGenre(name);
 
         }
-        [HttpGet]
-        public IEnumerable<KeyValuePair<string, double>> CopiesSoldByEachPublisher()
-        {
-            return this.logic.CopiesSoldByEachPublisher();
-        }
 
         [HttpGet("name")]
         public IQueryable<VideoGames> AllOfTheSameGenre(string name)
@@ -86,5 +81,15 @@ namespace E5WBMQ_HFT_20212222.Endpoint.Controllers
             return this.logic.GenrePerGame(name);
         }
 
+        [HttpGet]
+        public IEnumerable<KeyValuePair<string, int>> NumberOfGamesPerGenre()
+        {
+            return this.logic.NumberOfGamesPerGenre();
+        }
+        [HttpGet]
+        public IEnumerable<KeyValuePair<string, double>> CopiesSoldByEachPublisher()
+        {
+            return this.logic.CopiesSoldByEachPublisher();
+        }
     }
 }
