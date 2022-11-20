@@ -54,7 +54,7 @@ namespace E5WBMQ_HFT_2021222.Client
             }
 
         }
-
+            
         public List<T> Get<T>(string endpoint)
         {
             List<T> items = new List<T>();
@@ -71,6 +71,37 @@ namespace E5WBMQ_HFT_2021222.Client
             return items;
         }
 
+        public List<T> GetMany<T>(string endpoint, string arg)
+        {
+            List<T> items = new List<T>();
+            HttpResponseMessage response = client.GetAsync(endpoint+$"/name?name="+ arg).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                items = response.Content.ReadAsAsync<List<T>>().GetAwaiter().GetResult();
+            }
+            else
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
+            return items;
+        }
+
+        public List<KeyValuePair<T, K>> GetKeys<T,K>(string endpoint)
+        {
+            var items = new List<KeyValuePair<T,K>>();
+            HttpResponseMessage response = client.GetAsync(endpoint).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                items = response.Content.ReadAsAsync<List<KeyValuePair<T, K>>>().GetAwaiter().GetResult();
+            }
+            else
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
+            return items;
+        }
         public T GetSingle<T>(string endpoint)
         {
             T item = default(T);
@@ -86,7 +117,6 @@ namespace E5WBMQ_HFT_2021222.Client
             }
             return item;
         }
-
         public T Get<T>(int id, string endpoint)
         {
             T item = default(T);
@@ -102,7 +132,21 @@ namespace E5WBMQ_HFT_2021222.Client
             }
             return item;
         }
-
+        public T GetByName<T>(string name, string endpoint)
+        {
+            T item = default(T);
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" + name.ToString()).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            else
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
+            return item;
+        }
         public void Post<T>(T item, string endpoint)
         {
             HttpResponseMessage response =
@@ -115,7 +159,6 @@ namespace E5WBMQ_HFT_2021222.Client
             }
             response.EnsureSuccessStatusCode();
         }
-
         public void Delete(int id, string endpoint)
         {
             HttpResponseMessage response =
@@ -129,7 +172,6 @@ namespace E5WBMQ_HFT_2021222.Client
 
             response.EnsureSuccessStatusCode();
         }
-
         public void Put<T>(T item, string endpoint)
         {
             HttpResponseMessage response =
@@ -143,7 +185,6 @@ namespace E5WBMQ_HFT_2021222.Client
 
             response.EnsureSuccessStatusCode();
         }
-
     }
     public class RestExceptionInfo
     {
